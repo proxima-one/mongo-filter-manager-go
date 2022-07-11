@@ -68,18 +68,25 @@ func ModelFilterToBsonFilter(filter interface{}) bson.D {
 		value := valueRefl.Field(i)
 		fieldKind := value.Kind()
 		if fieldKind != reflect.Pointer {
-			panic(fmt.Sprintf("field is not pointer. Not implemented for other types"))
+			fmt.Println("field is not pointer. Not implemented for other types")
 			continue
 		}
 		valKind := value.Elem().Kind()
+		if valKind == reflect.Invalid {
+			continue
+		}
 		if valKind != reflect.String {
-			panic(fmt.Sprintf("field is not *string. Filter support only *string for now"))
+			fmt.Println("field is not *string. Filter support only *string for now")
 			continue
 		}
 		if !value.IsNil() {
 			name := typeRefl.Field(i).Tag.Get("bson")
-			filters = append(filters, bson.D{{name, *value.Interface().(*string)}})
+			val := *value.Interface().(*string)
+			if val != "" {
+				filters = append(filters, bson.D{{name, val}})
+			}
 		}
+
 	}
 	return AndBsonFilter(filters)
 }
