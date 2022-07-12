@@ -24,7 +24,7 @@ func (c *Cat) CollectionName() string {
 	return "cats"
 }
 
-func (c *Cat) Action() string {
+func (c *Cat) Action() driver.StoreAction {
 	return driver.StoreActionCreate
 }
 
@@ -34,4 +34,7 @@ func (c *Cat) IsState() bool {
 
 func (c *Cat) DefaultSortKeypath() string {
 	return "birthDate"
+}
+
+func (c *Cat) SetAction(_ driver.StoreAction) {
 }

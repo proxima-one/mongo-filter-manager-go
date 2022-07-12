@@ -24,7 +24,7 @@ func (d *Dog) CollectionName() string {
 	return "dogs"
 }
 
-func (d *Dog) Action() string {
+func (d *Dog) Action() driver.StoreAction {
 	return driver.StoreActionCreate
 }
 
@@ -34,4 +34,7 @@ func (d *Dog) IsState() bool {
 
 func (d *Dog) DefaultSortKeypath() string {
 	return "birthDate"
+}
+
+func (d *Dog) SetAction(_ driver.StoreAction) {
 }

@@ -23,10 +23,13 @@ func (s *State) IsState() bool {
 	return true
 }
 
-func (s *State) Action() string {
+func (s *State) Action() driver.StoreAction {
 	return driver.StoreActionUpdate
 }
 
 func (s *State) DefaultSortKeypath() string {
 	return ""
+}
+
+func (s *State) SetAction(_ driver.StoreAction) {
 }

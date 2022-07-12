@@ -2,16 +2,21 @@ package driver
 
 import "time"
 
-const StoreActionDelete = "delete"
-const StoreActionUpdate = "update"
-const StoreActionCreate = "create"
+type StoreAction string
+
+const (
+	StoreActionDelete StoreAction = "delete"
+	StoreActionUpdate             = "update"
+	StoreActionCreate             = "create"
+)
 
 type CanBeStored interface {
 	HaveId() bool
 	GetId() string
 	CollectionName() string
 	IsState() bool
-	Action() string
+	Action() StoreAction
+	SetAction(action StoreAction)
 	DefaultSortKeypath() string
 }
 

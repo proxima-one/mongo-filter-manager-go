@@ -8,7 +8,9 @@ import (
 )
 
 func PanicOnErr(err error) {
-	panic(err)
+	if err != nil {
+		panic(err)
+	}
 }
 
 type CatFilter struct {
